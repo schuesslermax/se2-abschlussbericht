@@ -1,0 +1,82 @@
+{% load static %}
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>DineFind</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/static/neues_style.css" />
+    <link rel="icon" type="image/x-icon" href="{% static 'Logof.png' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+<body>
+        <div id="C1">
+            <img src="/static/Logo.jpg" alt="Logo" class="Logo">
+            <h1>DineFind</h1>
+            <div id="Icondiv">
+                <form class="form" action="{% url 'Favoriten' %}"><button class="icons"><i class="material-icons">favorite</i></button></form>
+            </div>
+                
+        </div>
+        <br>
+        <br>
+    <div id="eins" class="groß">
+       <div class="card">
+
+    <div class="card-images">
+        {% if restaurant.bild.0 %}
+        {% for bild in restaurant.bild %}
+                <img src="{{ bild }}" alt="Bild von {{ restaurant.name }}" />
+        {% endfor %}
+        {% else %}
+            <img src="{{ restaurant.bild }}" alt="Bild von {{ restaurant.name }}" />
+        {% endif %} 
+
+    </div>
+   
+    <div class="card-content">
+        <h1 class="restaurant-name">{{ restaurant.name }}</h1>
+
+        <p class="address">📍 {{ restaurant.adresse }}</p>
+
+        <p class="price-range">💶 Preisniveau: {{ restaurant.preis }}</p>
+
+        <div class="about">
+            <h2>Was macht uns besonders?</h2>
+            <p>{{ restaurant.beschreibung }}</p>
+        </div>
+
+        <div class="favorites">
+            <h2>Beliebteste Gerichte</h2>
+            <ul>
+                {% for gericht in restaurant.gerichte %}
+                    <li>{{ gericht }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div class="cta">
+            <p>❤️ Like, wenn du …</p>
+            <p>... auf {{ restaurant.kategorie }} Küche, liebevolle Atmosphäre und exzellenten Wein stehst.</p>
+        </div>
+    </div>
+
+    </div>
+        <form  method="POST" action="{% url 'Hauptseite' %}">
+        {% csrf_token %}
+        <input type="hidden" name="restaurant_id" value="{{ restaurant.restaurant_id }}">
+        <button type="submit" id="like" name="bewertung" value="schlecht">
+          <span class="material-symbols-outlined">sentiment_extremely_dissatisfied</span></button>
+        <button type="submit" id="like" name="bewertung" value="gut">
+          <span class="material-symbols-outlined">sentiment_excited</span>
+        </button>
+        </form>
+      </div>
+    <footer>
+        <p><a href="#C1">Zurück nach oben</a></p>
+        <i class="material-icons">copyright</i>Karkoschka; Renckly; Schüßler</footer>
+</body>
+</html>

@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Alle Restaurants bewertet</title>
+    <meta http-equiv="refresh" content="3;url={% url 'Favoriten' %}">
+    <link rel="stylesheet" type="text/css" href="/static/neues_style.css">
+    <link rel="icon" type="image/x-icon" href="{% static 'Logof.png' %}">
+</head>
+<body>
+    <div id="C1">
+            <img src="/static/Logo.jpg" alt="Logo" class="Logo">
+                
+        </div>
+    <div class="info-banner" style="text-align:center; margin-top:50px;">
+        <h2>🎉 Das ist ein Match!</h2>
+        <p>Du wirst automatisch zu deinen Favoriten weitergeleitet...</p>
+    </div>
+</body>
+</html>
